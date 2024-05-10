@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
     model = MNISTCNN().to(device)
     train(model, train_loader, max_epochs, early_stopping_steps)
-    torch.save(model.state_dict(), "trained_models/mnist_cnn_1.pth")
+    torch.save(model.state_dict(), "trained_models/mnist_cnn.pth")
 
     end_time = time.time()
     time_taken = end_time - start_time
