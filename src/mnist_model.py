@@ -26,14 +26,14 @@ torch.backends.cudnn.benchmark = False
 
 device = "cuda"
 
-transform=transforms.ToTensor() 
+transform=transforms.ToTensor()
 
 train_set_full = datasets.MNIST(root='data', train=True, download=True, transform=transform)
 labels = [datapoint[1] for datapoint in train_set_full]
 train_indices, val_indices = train_test_split(
-    list(range(len(train_set_full))), 
-    test_size=1/6, 
-    stratify=labels, 
+    list(range(len(train_set_full))),
+    test_size=1/6,
+    stratify=labels,
     random_state=42
 )
 
@@ -47,7 +47,7 @@ def seed_worker(worker_id):
     np.random.seed(worker_seed)
     random.seed(worker_seed)
 
-g = torch.Generator()
+g = torch.Generator() 
 g.manual_seed(42)
 
 train_loader = DataLoader(train_set, batch_size=64, shuffle=True, 
@@ -100,6 +100,7 @@ class MNISTCNN(nn.Module):
         x = self.softmax(x)
         return x
     
+
 def test_accuracy(model, loader):
     correct = 0
     total = 0
@@ -114,6 +115,7 @@ def test_accuracy(model, loader):
     accuracy = correct / total
     accuracy_percentage = np.round(accuracy * 100, 2)
     return accuracy_percentage
+
 
 def train(model, train_loader, max_epochs, early_stopping_steps):
 
